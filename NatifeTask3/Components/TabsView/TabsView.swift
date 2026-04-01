@@ -8,15 +8,15 @@
 import UIKit
 
 final class TabsView: UIView {
-
+    
     // MARK: - UI Elements
-
+    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: layout
         )
-
+        
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .black
         collectionView.dataSource = self
@@ -24,44 +24,56 @@ final class TabsView: UIView {
         collectionView.register(cell: TabCell.self)
         return collectionView
     }()
-
+    
     private lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = .zero
         return layout
     }()
-
+    
     private lazy var indicatorView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBlue
         view.layer.cornerRadius = 2
         return view
     }()
-
+    
     // MARK: - Properties
-
+    
+    private var items: [String] = []
     private var selectedIndex = 0
-    private let items = Constant.tabsItems
-
+    
     // MARK: - Initializers
-
+    
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: .zero)
         setupView()
         setupLayout()
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Lifecycle
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         guard bounds != .zero else { return }
+        setupIndicator(animated: false)
+    }
+}
+
+// MARK: - Internal Methods
+
+extension TabsView {
+    func configure(with items: [String]) {
+        self.items = items
+        selectedIndex = 0
+        collectionView.reloadData()
+        layoutIfNeeded()
         setupIndicator(animated: false)
     }
 }
@@ -73,11 +85,11 @@ private extension TabsView {
         addSubview(collectionView)
         collectionView.addSubview(indicatorView)
     }
-
+    
     func setupIndicator(animated: Bool) {
         let indexPath = IndexPath(item: selectedIndex, section: 0)
         guard let attributes = collectionView.layoutAttributesForItem(at: indexPath) else { return }
-
+        
         UIView.animate(withDuration: animated ? Animation.duration : 0) {
             self.indicatorView.frame = CGRect(
                 x: attributes.frame.minX,
@@ -92,7 +104,7 @@ private extension TabsView {
 private extension TabsView {
     func setupLayout() {
         disableAutoresizing(collectionView)
-
+        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -103,15 +115,11 @@ private extension TabsView {
 }
 
 private extension TabsView {
-    enum Constant {
-        static let tabsItems = ["All", "Work", "Friends"]
-    }
-
     enum Layout {
-        static let itemPadding: CGFloat = 16
+        static let itemPadding: CGFloat = 32
         static let indicatorHeight: CGFloat = 3
     }
-
+    
     enum Animation {
         static let duration: TimeInterval = 0.25
     }
@@ -123,7 +131,7 @@ extension TabsView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         items.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: TabCell = collectionView.dequeue(for: indexPath)
         cell.configure(
@@ -142,11 +150,11 @@ extension TabsView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let width = max(
-            items[indexPath.item].size(withAttributes: [.font: TabFont.tab]).width + Layout.itemPadding,
-            collectionView.bounds.width / CGFloat(items.count)
-        )
+        let textWidth = items[indexPath.item].size(withAttributes: [.font: TabFont.tab]).width + Layout.itemPadding
+        let equalWidth = collectionView.bounds.width / CGFloat(items.count)
+        let width = items.count <= 3 ? max(textWidth, equalWidth) : textWidth
         let size = CGSize(width: width, height: collectionView.bounds.height)
+        
         return size
     }
 }
@@ -156,19 +164,18 @@ extension TabsView: UICollectionViewDelegateFlowLayout {
 extension TabsView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.item != selectedIndex else { return }
-
+        
         let previousIndex = selectedIndex
         selectedIndex = indexPath.item
-
+        
         collectionView.reloadItems(at: [
             IndexPath(item: previousIndex, section: 0),
             indexPath
         ])
-
-        setupIndicator(animated: true)
-
+        
         UIView.animate(withDuration: Animation.duration) {
-            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
+        setupIndicator(animated: true)
     }
 }

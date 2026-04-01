@@ -11,7 +11,11 @@ final class ViewController: UIViewController {
 
     // MARK: - Properties
 
-    private let tabsView = TabsView()
+    private var tabsView: TabsView = {
+        let tabsView = TabsView()
+        tabsView.configure(with: Constant.tabsItems)
+        return tabsView
+    }()
 
     // MARK: - Lifecycle
 
@@ -41,5 +45,11 @@ private extension ViewController {
             tabsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tabsView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+}
+
+private extension ViewController {
+    enum Constant {
+        static let tabsItems = ["All", "Work", "Friends"]
     }
 }
