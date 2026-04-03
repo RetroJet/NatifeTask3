@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		789B43A02F7AC5A000DFF47A /* NatifeTask3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatifeTask3.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		789B4BAF2F7D519000DFF47A /* NatifeTask3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = NatifeTask3.app; path = "/Users/nazar/Desktop/Swift/Learn/NatifeTask3/build/Debug-iphoneos/NatifeTask3.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		789B43B22F7AC5A200DFF47A /* Exceptions for "NatifeTask3" folder in "NatifeTask3" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 789B439F2F7AC5A000DFF47A /* NatifeTask3 */;
 		};
@@ -46,16 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				789B43A22F7AC5A000DFF47A /* NatifeTask3 */,
-				789B43A12F7AC5A000DFF47A /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		789B43A12F7AC5A000DFF47A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				789B43A02F7AC5A000DFF47A /* NatifeTask3.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,7 +71,7 @@
 			packageProductDependencies = (
 			);
 			productName = NatifeTask3;
-			productReference = 789B43A02F7AC5A000DFF47A /* NatifeTask3.app */;
+			productReference = 789B4BAF2F7D519000DFF47A /* NatifeTask3.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -107,8 +98,11 @@
 			);
 			mainGroup = 789B43972F7AC5A000DFF47A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				789B49D32F7C4C7900DFF47A /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 789B43A12F7AC5A000DFF47A /* Products */;
+			productRefGroup = 789B43972F7AC5A000DFF47A;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -147,10 +141,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 79NZFM7X3P;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NatifeTask3/Info.plist;
+				INFOPLIST_FILE = NatifeTask3/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -178,10 +173,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 79NZFM7X3P;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NatifeTask3/Info.plist;
+				INFOPLIST_FILE = NatifeTask3/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -343,6 +339,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		789B49D32F7C4C7900DFF47A /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.63.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 789B43982F7AC5A000DFF47A /* Project object */;
 }
