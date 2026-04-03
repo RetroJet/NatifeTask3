@@ -72,7 +72,7 @@ final class TabsView: UIView {
 extension TabsView {
     func configure(with items: [String], selectedIndex: Int = 0) {
         self.items = items
-        self.selectedIndex = selectedIndex
+        self.selectedIndex = max(0, min(selectedIndex, items.count - 1))
         collectionView.reloadData()
         layoutIfNeeded()
         setupIndicator(animated: false)
